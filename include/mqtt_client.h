@@ -259,6 +259,7 @@ typedef struct esp_mqtt_client_config_t {
                                              verify broker.*/
           bool skip_cert_common_name_check; /*!< Skip any validation of server certificate CN field, this reduces the
                                       security of TLS and makes the *MQTT* client susceptible to MITM attacks  */
+          bool skip_server_verification;    /*!< Skip server verification completely. Should only be used for debugging */
           const char **alpn_protos;        /*!< NULL-terminated list of supported application protocols to be used for ALPN */
       } verification; /*!< Security verification of the broker */
   } broker; /*!< Broker address and security verification */

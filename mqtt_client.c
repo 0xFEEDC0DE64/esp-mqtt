@@ -126,6 +126,8 @@ static esp_err_t esp_mqtt_set_ssl_transport_properties(esp_transport_list_handle
 
     if (cfg->use_global_ca_store == true) {
         esp_transport_ssl_enable_global_ca_store(ssl);
+    } else if (cfg->skip_server_verification == true) {
+        esp_transport_ssl_skip_server_verification(ssl);
     } else if (cfg->crt_bundle_attach != NULL) {
 #ifdef MQTT_SUPPORTED_FEATURE_CERTIFICATE_BUNDLE
 #ifdef CONFIG_MBEDTLS_CERTIFICATE_BUNDLE
@@ -509,6 +511,7 @@ esp_err_t esp_mqtt_set_config(esp_mqtt_client_handle_t client, const esp_mqtt_cl
     client->config->clientkey_buf = config->credentials.authentication.key;
     client->config->clientkey_bytes = config->credentials.authentication.key_len;
     client->config->skip_cert_common_name_check = config->broker.verification.skip_cert_common_name_check;
+    client->config->skip_server_verification = config->broker.verification.skip_server_verification;
     client->config->use_secure_element = config->credentials.authentication.use_secure_element;
     client->config->ds_data = config->credentials.authentication.ds_data;
 
